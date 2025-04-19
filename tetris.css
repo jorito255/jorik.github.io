@@ -22,3 +22,16 @@ canvas {
     font-size: 14px;
     color: #ccc;
 }
+.mobile-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.mobile-controls button {
+    font-size: 20px;
+    padding: 10px;
+    background-color: #00ffff;
+    border: none;
+    cursor: pointer;
+}
