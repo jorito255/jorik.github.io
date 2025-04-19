@@ -106,6 +106,23 @@ document.addEventListener("keydown", (event) => { //Змінено
     }
  });
 
+document.getElementById("left").addEventListener("click", () => {
+    if (!collision(currentTetromino, offsetX - 1, offsetY)) offsetX--;
+});
+
+document.getElementById("right").addEventListener("click", () => {
+    if (!collision(currentTetromino, offsetX + 1, offsetY)) offsetX++;
+});
+
+document.getElementById("down").addEventListener("click", () => {
+    if (!collision(currentTetromino, offsetX, offsetY + 1)) offsetY++;
+});
+
+document.getElementById("rotate").addEventListener("click", () => {
+    const rotated = rotateTetromino(currentTetromino);
+    if (!collision(rotated, offsetX, offsetY)) currentTetromino = rotated;
+});
+
 function gameLoop() { //Змінено
     if (!collision(currentTetromino, offsetX, offsetY+1)) {
         offsetY++;
