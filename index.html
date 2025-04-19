@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tetris</title>
     <link rel="stylesheet" href="tetris.css">
 </head>
 <body>
     <canvas id="tetrisCanvas" width="320" height="640"></canvas>
-    <div class="score" id="scoreDisplay">Очки: 0</div>
+    <div class="score-box">
+        <span id="scoreDisplay">Очки: 0</span>
+    </div>
     <div class="controls">
         Керування: Стрілки
     </div>
     <div class="mobile-controls">
-    <button id="left">◀</button>
-    <button id="rotate">🔄</button>
-    <button id="right">▶</button>
-    <button id="down">▼</button>
+        <button id="left">◀</button>
+        <button id="rotate">🔄</button>
+        <button id="right">▶</button>
+        <button id="down">▼</button>
     </div>
     <script src="tetris.js"></script>
 </body>
