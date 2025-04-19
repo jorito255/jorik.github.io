@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #121212;
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,25 +9,30 @@ body{
     height: 100vh;
     margin: 0;
 }
+
 canvas {
     border: 3px solid #00ffff;
     background-color: #000;
 }
+
 .score-box {
     margin-top: 10px;
     font-size: 20px;
 }
+
 .controls {
     margin-top: 10px;
     font-size: 14px;
     color: #ccc;
 }
+
 .mobile-controls {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
 }
+
 .mobile-controls button {
     font-size: 20px;
     padding: 10px;
