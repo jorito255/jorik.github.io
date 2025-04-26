@@ -49,7 +49,7 @@ function drawTetromino(tetromino, offsetX, offsetY) {
 }
 
 function rotateTetromino(tetromino) {
-    return tetromino[0].map((_, index) => 
+    return tetromino[0].map((_, index) =>
         tetromino.map(row => row[index]).reverse()
     );
 }
@@ -93,21 +93,69 @@ function clearLines() {
     }
 }
 
-document.getElementById("left").addEventListener("click", () => {
-    if (!collision(currentTetromino, offsetX - 1, offsetY)) offsetX--;
+// **Клавіатурне керування для ПК**
+document.addEventListener("keydown", (e) => {
+    switch (e.key) {
+        case "ArrowLeft":
+            if (!collision(currentTetromino, offsetX - 1, offsetY))
+                offsetX--;
+            break;
+        case "ArrowRight":
+            if (!collision(currentTetromino, offsetX + 1, offsetY))
+                offsetX++;
+            break;
+        case "ArrowDown":
+            if (!collision(currentTetromino, offsetX, offsetY + 1))
+                offsetY++;
+            break;
+        case "ArrowUp":
+            const rotated = rotateTetromino(currentTetromino);
+            if (!collision(rotated, offsetX, offsetY))
+                currentTetromino = rotated;
+            break;
+    }
 });
 
-document.getElementById("right").addEventListener("click", () => {
-    if (!collision(currentTetromino, offsetX + 1, offsetY)) offsetX++;
+// **Тач керування для мобільних пристроїв**
+let touchStartX = 0;
+let touchStartY = 0;
+const threshold = 30; // мінімальна відстань для розпізнавання свайпу
+
+canvas.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
 });
 
-document.getElementById("down").addEventListener("click", () => {
-    if (!collision(currentTetromino, offsetX, offsetY + 1)) offsetY++;
-});
+canvas.addEventListener("touchend", (e) => {
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
 
-document.getElementById("rotate").addEventListener("click", () => {
-    const rotated = rotateTetromino(currentTetromino);
-    if (!collision(rotated, offsetX, offsetY)) currentTetromino = rotated;
+    if (Math.abs(deltaX) < threshold && Math.abs(deltaY) < threshold) {
+        // Тап: поворот фігури
+        const rotated = rotateTetromino(currentTetromino);
+        if (!collision(rotated, offsetX, offsetY))
+            currentTetromino = rotated;
+    } else {
+        // Розпізнавання свайпу
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // Горизонтальний свайп
+            if (deltaX > 0) {
+                if (!collision(currentTetromino, offsetX + 1, offsetY))
+                    offsetX++;
+            } else {
+                if (!collision(currentTetromino, offsetX - 1, offsetY))
+                    offsetX--;
+            }
+        } else {
+            // Вертикальний свайп (тільки вниз)
+            if (deltaY > 0) {
+                if (!collision(currentTetromino, offsetX, offsetY + 1))
+                    offsetY++;
+            }
+        }
+    }
 });
 
 function gameLoop() {
