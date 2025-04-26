@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tetris</title>
-    <link rel="stylesheet" href="tetris.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ігровий лаунчер</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Головне меню -->
+  <div id="menuSection">
+    <h1>Виберіть гру</h1>
+    <button id="btnFlappy">Flappy Bird</button>
+    <button id="btnTetris">Tetris</button>
+  </div>
+
+  <!-- Секція гри Flappy Bird -->
+  <div id="flappySection" class="gameSection" style="display: none;">
+    <canvas id="flappyCanvas" width="400" height="300"></canvas>
+    <button class="backBtn" id="backFromFlappy">Головне меню</button>
+  </div>
+
+  <!-- Секція гри Tetris -->
+  <div id="tetrisSection" class="gameSection" style="display: none;">
     <canvas id="tetrisCanvas" width="320" height="640"></canvas>
     <div class="score-box">
-        <span id="scoreDisplay">Очки: 0</span>
+      <span id="scoreDisplay">Очки: 0</span>
     </div>
     <div class="controls">
-        Керування: Стрілками для ПК або свайпами/тапами для мобільного
+      Керування: Стрілками для ПК або свайпами/тапами для мобільного
     </div>
-    <script src="tetris.js"></script>
+    <button class="backBtn" id="backFromTetris">Головне меню</button>
+  </div>
+
+  <script src="launcher.js"></script>
 </body>
 </html>
